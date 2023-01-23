@@ -1,0 +1,46 @@
+-- Crear la Base de Datos
+CREATE DATABASE ejercicio6
+charset utf8mb4
+collate utf8mb4_spanish2_ci;
+
+-- Activar la Base de Datos
+USE ejercicio6;
+
+-- Crear la tabla personas
+CREATE TABLE personas (
+    idPersona INT AUTO_INCREMENT,
+    dniPersona VARCHAR(9),
+    nombrePersona VARCHAR(45),
+    primerApellidoPersona VARCHAR(45),
+    segundoApellidoPersona VARCHAR(45),
+    telefonoPersona VARCHAR(9),
+    correoElectronicoPersona VARCHAR(100),
+    direccionPersonaPersona VARCHAR(100),
+    PRIMARY KEY (idPersona)
+);
+
+-- Crear la tabla animales
+CREATE TABLE animales (
+    idAnimal INT AUTO_INCREMENT,
+    microchipAnimal DECIMAL(20 , 0 ),
+    nombreAnimal VARCHAR(45),
+    razaAnimal VARCHAR(45),
+    PRIMARY KEY (idAnimal)
+);
+
+-- Crear la tabla histórico
+CREATE TABLE historico (
+    idhistorico INT AUTO_INCREMENT,
+    idAnimalFK INT,
+    idPersonasFK INT,
+    fechaDesde DATE,
+    fechaHasta DATE,
+    PRIMARY KEY (idHistorico),
+    FOREIGN KEY (idPersonasFK)
+        REFERENCES personas (idPersona),
+    FOREIGN KEY (idAnimalFK)
+        REFERENCES animales (idAnimal)
+);
+
+USE ejercicio6;
+ALTER TABLE historico CHANGE idhistorico idHistorico INT AUTO_INCREMENT;

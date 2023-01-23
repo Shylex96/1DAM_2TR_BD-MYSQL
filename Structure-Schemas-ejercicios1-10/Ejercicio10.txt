@@ -1,0 +1,44 @@
+-- Crear la Base de Datos
+CREATE DATABASE ejercicio10
+charset utf8mb4
+collate utf8mb4_spanish2_ci;
+
+-- Activar la Base de Datos
+USE ejercicio10;
+
+-- Crear la tabla vehiculos
+CREATE TABLE vehiculos (
+    idVehiculo INT AUTO_INCREMENT,
+    marcaVehiculo VARCHAR(9),
+    modeloVehiculo VARCHAR(45),
+    fechaFabricacionVehiculo DATE,
+    tipoVehiculo VARCHAR(45),
+    matriculaVehiculo VARCHAR(10),
+    fechaMatriculacionVehiculo DATE,
+    fechaBajaVehiculo DATE,
+    PRIMARY KEY (idVehiculo)
+);
+-- Crear la tabla personas
+CREATE TABLE personas (
+    idPersona INT AUTO_INCREMENT,
+    nombrePersona VARCHAR(45),
+    primerApellidoPersona VARCHAR(45),
+    segundoApellidoPersona VARCHAR(45),
+    telefonoPersona VARCHAR(9),
+    correoElectronicoPersona VARCHAR(100),
+    PRIMARY KEY (idPersona)
+);
+
+-- Crear la tabla posesiones
+CREATE TABLE posesiones (
+    idPosesion INT AUTO_INCREMENT,
+    idVehiculoFK INT,
+    idPersonaFK INT,
+    fechaDesde DATE,
+    fechaHasta DATE,
+    PRIMARY KEY (idPosesion),
+    FOREIGN KEY (idVehiculoFK)
+        REFERENCES vehiculos (idVehiculo),
+    FOREIGN KEY (idPersonaFK)
+        REFERENCES personas (idPersona)
+);

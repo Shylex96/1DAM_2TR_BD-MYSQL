@@ -1,0 +1,44 @@
+-- Crear la Base de Datos
+CREATE DATABASE ejercicio8
+charset utf8mb4
+collate utf8mb4_spanish2_ci;
+
+-- Activar la Base de Datos
+USE ejercicio8;
+
+-- Crear la tabla departamentos
+CREATE TABLE departamentos (
+	idDepartamento INT AUTO_INCREMENT,
+    nombreDepartamento VARCHAR(45),
+    PRIMARY KEY (idDepartamento)
+);
+-- Crear la tabla empleados
+CREATE TABLE empleados (
+	idEmpleado INT AUTO_INCREMENT,
+    nombreEmpleado VARCHAR (45),
+    primerApellidoEmpleado VARCHAR (45),
+    segundoApellidoEmpleado VARCHAR (45),
+    dniEmpleado VARCHAR(9),
+    PRIMARY KEY (idEmpleado)
+);
+
+-- Crear la tabla historico
+CREATE TABLE historico (
+    idhistorico INT AUTO_INCREMENT,
+    idEmpleadoFK INT,
+    idDepartamentoFK INT,
+	cargoEmpleado VARCHAR (45),
+    fechaDesde DATE,
+    fechaHasta DATE,
+    PRIMARY KEY (idHistorico),
+    FOREIGN KEY (idDepartamentoFK)
+        REFERENCES departamentos (idDepartamento),
+    FOREIGN KEY (idEmpleadoFK)
+        REFERENCES empleados (idEmpleado)
+);
+
+
+SELECT * FROM departamentos;
+SELECT * FROM empleados;
+SELECT * FROM historico;
+
