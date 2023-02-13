@@ -1,0 +1,67 @@
+-- Mostrar todas las BBDD
+SHOW DATABASES;
+-- Activar una BD concreta
+USE ejercicio1;
+-- Mostrar todas las tablas de la BD activa
+SHOW TABLES;
+-- Mostrar estructura de una Tabla
+DESCRIBE ciudades;
+SHOW COLUMNS FROM ciudades;
+-- Mostrar creación de una Tabla
+SHOW CREATE TABLE ciudades;
+-- Mostrar creación de la BD
+SHOW CREATE DATABASE ejercicio1;
+-- Mostrar errores
+SHOW WARNINGS;
+
+-- Usuarios
+
+-- Crear el usuario
+-- CREATE USER 'nombre'@'ubicacion' identified by 'clave';
+CREATE USER 'esteban'@'localhost' identified by 'Studium2022;';
+-- Solo puede hacer 10 cambios por hora.
+-- CREATE USER 'esteban'@'localhost' identified by 'Studium2022;' WITH
+-- MAX_QUERIES_PER_HOUR 10 MAX_UPDATES_PER_HOUR;
+-- CREATE USER 'esteban'@'192.168.0.123' identified by 'Studium2022;';
+-- CREATE USER 'esteban'@'192.168.0' identified by 'Studium2022;';
+-- CREATE USER 'esteban'@'%' identified by 'Studium2022;';
+
+-- Conceder permisos al usuario
+-- GRANT permisos ON bd.tabla TO usuario; (Plantilla)
+-- GRANT ALL ON *.* TO 'esteban'@'localhost'; (Todos los permisos (ALL) sobre todas las tablas (.*) de todas las BBDD (*.)
+-- GRANT ALL ON ejercicio1.* TO 'esteban'@'localhost'; (Todos los permisos (ALL) sobre todas las tablas que pertenezcan a la BD de ejercicio1)
+
+-- Tablas ciudades, monumentos, continentes:
+-- GRANT ALL ON ejercicio1.ciudades TO 'esteban'@'localhost';
+-- GRANT ALL ON ejercicio1.monumentos TO 'esteban'@'localhost';
+
+-- Permisos:
+
+-- Dar permisos de Datos a TODAS las tablas de ejercicio1 al usuario 'esteban' con conexión local.
+GRANT SELECT, UPDATE, INSERT, DELETE 
+ON ejercicio1.* TO 'esteban'@'localhost';
+-- Dar permiso de crear usuarios
+GRANT CREATE USER ON ejercicio1.* TO 'esteban'@'localhost'
+WITH GRANT OPTION;
+-- Permisos de estructura
+-- GRANT CREATE, ALTER, DROP, CREATE USER, CREATE VIEW ON ciudades.ciudades to 'esteban'@'localhost';
+-- Consultar permisos
+SHOW GRANTS FOR 'esteban'@'localhost';
+-- Quitar permisos
+-- REVOKE permisos ON bd.tabla FROM usuario (Plantilla);
+REVOKE DELETE ON ejercicio1.* FROM 'esteban'@'localhost';
+SHOW GRANTS FOR 'esteban'@'localhost';
+
+-- Modificar usuarios
+-- Cambiar clave
+-- ALTER USER 'esteban'@'localhost' IDENTIFIED BY 'nuevaClave';
+-- RENAME USER 'estebanAlbarran'@'localhost' TO 'esteban'@'localhost';
+
+-- Eliminar usuarios
+-- DROP USER 'esteban'@'localhost';
+-- Hasta la versión 7 había que revocar todos los permisos antes de borrar el usuario.
+
+-- Resetear usuarios
+FLUSH PRIVILEGES;
+
+
